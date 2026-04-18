@@ -1,0 +1,49 @@
+@model Hotellerie_X.Models.HotellerieModel.Appreciation
+@using Hotellerie_X.Models.HotellerieModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="container mt-4">
+    <h1>Ajouter une appréciation</h1>
+
+    <form asp-action="Create">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        
+        <div class="form-group mb-3">
+            <label asp-for="NomPers" class="form-label"></label>
+            <input asp-for="NomPers" class="form-control" />
+            <span asp-validation-for="NomPers" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="Commentaire" class="form-label"></label>
+            <textarea asp-for="Commentaire" class="form-control" rows="4"></textarea>
+            <span asp-validation-for="Commentaire" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="Note" class="form-label"></label>
+            <input asp-for="Note" class="form-control" type="number" min="1" max="10" />
+            <span asp-validation-for="Note" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="HotelId" class="form-label"></label>
+            <select asp-for="HotelId" class="form-control" asp-items="ViewBag.Hotels">
+                <option value="">-- Sélectionner un hôtel --</option>
+            </select>
+            <span asp-validation-for="HotelId" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-success">Créer</button>
+            <a asp-action="Index" class="btn btn-secondary">Retour</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

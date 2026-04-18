@@ -1,0 +1,32 @@
+@model Hotellerie_X.Models.HotellerieModel.Appreciation
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<div class="container mt-4">
+    <h1>Supprimer l'appréciation</h1>
+
+    <h3 class="text-danger">Êtes-vous sûr de vouloir supprimer cette appréciation ?</h3>
+
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.NomPers)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NomPers)
+        </dd>
+        
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Commentaire)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Commentaire)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete" asp-route-id="@Model.Id" method="post">
+        <button type="submit" class="btn btn-danger">Supprimer</button>
+        <a asp-action="Index" class="btn btn-secondary">Annuler</a>
+    </form>
+</div>

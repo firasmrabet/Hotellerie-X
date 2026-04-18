@@ -1,0 +1,141 @@
+@model Hotellerie_X.Models.HotellerieModel.Hotel
+
+@{
+    ViewData["Title"] = "Détails de l'Hôtel";
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8">
+            <h1>@ViewData["Title"]</h1>
+            <hr />
+
+            <div class="row mb-3">
+                <div class="col-md-3">
+                    <strong>ID :</strong>
+                </div>
+                <div class="col-md-9">
+                    @Html.DisplayFor(model => model.Id)
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-3">
+                    <strong>Nom :</strong>
+                </div>
+                <div class="col-md-9">
+                    @Html.DisplayFor(model => model.Nom)
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-3">
+                    <strong>Étoiles :</strong>
+                </div>
+                <div class="col-md-9">
+                    @Html.DisplayFor(model => model.Etoiles) / 5
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-3">
+                    <strong>Ville :</strong>
+                </div>
+                <div class="col-md-9">
+                    @Html.DisplayFor(model => model.Ville)
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-3">
+                    <strong>Site Web :</strong>
+                </div>
+                <div class="col-md-9">
+                    @if (!string.IsNullOrEmpty(Model.SiteWeb))
+                    {
+                        <a href="@Model.SiteWeb" target="_blank">@Html.DisplayFor(model => model.SiteWeb)</a>
+                    }
+                    else
+                    {
+                        <span>N/A</span>
+                    }
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-3">
+                    <strong>Téléphone :</strong>
+                </div>
+                <div class="col-md-9">
+                    @if (!string.IsNullOrEmpty(Model.Tel))
+                    {
+                        @Html.DisplayFor(model => model.Tel)
+                    }
+                    else
+                    {
+                        <span>N/A</span>
+                    }
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-3">
+                    <strong>Pays :</strong>
+                </div>
+                <div class="col-md-9">
+                    @if (!string.IsNullOrEmpty(Model.Pays))
+                    {
+                        @Html.DisplayFor(model => model.Pays)
+                    }
+                    else
+                    {
+                        <span>N/A</span>
+                    }
+                </div>
+            </div>
+
+            <hr />
+
+            <!-- Section Appréciations -->
+            <div class="mt-5">
+                <h3>Appréciations (@(Model.Appreciations?.Count ?? 0))</h3>
+
+                @if (Model.Appreciations != null && Model.Appreciations.Any())
+                {
+                    <div class="row">
+                        @foreach (var appreciation in Model.Appreciations)
+                        {
+                            <div class="col-md-12 mb-3">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <strong>@appreciation.NomPers</strong> 
+                                        <span class="badge bg-info float-end">@appreciation.Note / 10</span>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="card-text">@appreciation.Commentaire</p>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <p class="text-muted">Aucune appréciation pour le moment.</p>
+                }
+
+                <div class="mt-3">
+                    <a asp-controller="Appreciations" asp-action="Create" asp-route-hotelId="@Model.Id" 
+                       class="btn btn-success">Ajouter une appréciation</a>
+                </div>
+            </div>
+
+            <hr />
+
+            <div class="mt-4">
+                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Éditer</a>
+                <a asp-action="Index" class="btn btn-secondary">Retour à la liste</a>
+            </div>
+        </div>
+    </div>
+</div>
